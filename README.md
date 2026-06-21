@@ -1,6 +1,6 @@
 # Morgh's Cheats v3.1
 
-《骑马与砍杀2：霸主》(Mount & Blade II: Bannerlord) 作弊模组
+《骑马与砍杀2：霸主》(Mount & Blade II: Bannerlord) 作弊模组-1.3.15
 
 ## 功能特性
 
