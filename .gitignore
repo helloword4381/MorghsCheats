@@ -1,0 +1,37 @@
+# === Bannerlord Mod 项目忽略规则 ===
+
+# 编译产物
+bin/
+obj/
+*.dll
+*.pdb
+*.xml
+
+# 依赖库（已放在子目录，不入库）
+ButterLib_2.10.3/
+Harmony_2.4.2.225/
+MBOptionScreen_5.11.3/
+UIExtenderEx_2.13.2/
+dnSpy_6.1.8_64bit_Green/
+
+# 旧版代码（参考用，不入库）
+MorghsCheats-OLD-qikan-1.4.1/
+
+# 崩溃跳过模组（成品，不入库）
+youxibengkuitiaoguo_1.3.15/
+
+# WorkBuddy 数据
+.workbuddy/
+
+# 临时文件
+*.log
+*.txt
+*.cache
+*.tmp
+*.suo
+*.user
+*.sln.docstates
+
+# 系统文件
+.DS_Store
+Thumbs.db
