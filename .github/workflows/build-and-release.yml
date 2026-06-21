@@ -1,4 +1,4 @@
-name: Build and Release
+name: Release
 
 on:
   push:
@@ -6,28 +6,12 @@ on:
       - 'v*'
 
 jobs:
-  build:
-    runs-on: windows-latest
+  release:
+    runs-on: ubuntu-latest
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v2
-    
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v2
-      
-    - name: Restore packages
-      run: |
-        nuget restore MorghsCheats-NEW-qikan-1.3.15/MorghsCheats.csproj
-      working-directory: .
-      
-    - name: Build solution
-      run: |
-        msbuild MorghsCheats-NEW-qikan-1.3.15/MorghsCheats.csproj /p:Configuration=Release /p:Platform="Any CPU"
-      working-directory: .
       
     - name: Create Release
       id: create_release
@@ -37,15 +21,26 @@ jobs:
       with:
         tag_name: ${{ github.ref }}
         release_name: Release ${{ github.ref }}
+        body: |
+          自动生成的 Release 版本 ${{ github.ref }}
+          
+          请手动下载源代码编译后，将 DLL 文件上传到本 Release。
+          
+          ## 编译说明
+          1. 克隆本仓库
+          2. 使用 Visual Studio 打开项目
+          3. 修改 .csproj 中的游戏路径
+          4. 编译 Release 版本
+          5. 将生成的 DLL 上传到本 Release
         draft: false
         prerelease: false
         
-    - name: Upload Release Asset
+    - name: Upload Source Zip
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./MorghsCheats-NEW-qikan-1.3.15/bin/Win64_Shipping_Client/MorghsCheats.dll
-        asset_name: MorghsCheats.dll
-        asset_content_type: application/octet-stream
+        asset_path: ./MorghsCheats-NEW-qikan-1.3.15/MorghsCheats.csproj
+        asset_name: MorghsCheats.csproj
+        asset_content_type: application/xml
